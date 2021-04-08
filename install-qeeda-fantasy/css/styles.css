@@ -1,0 +1,154 @@
+#title{
+    background-color: #ff4c68;
+    font-family: 'Ubuntu', sans-serif;
+    color: #fff;
+    position: relative;
+}
+body{
+    font-family: 'Montserrat-Black', sans-serif;
+}
+#title .container-fluid{
+    padding: 2% 10% 6%;
+    text-align: left;
+    background-image: linear-gradient(to right,rgba(255, 17, 49, 0.527), rgba(255, 123, 0, 0.5)),
+    url("../images/ipl2.jpg");
+}
+.container-fluid{
+    padding: 5% 10%;
+    text-align: center;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: 'montserrat';
+    font-weight: bold;
+    line-height: 1.5;
+}
+.color-section{
+    color: #fff;
+    background-color: #fa7575;
+    
+}
+h1{
+    font-size: 4rem;
+}
+h2{
+    font-size: 3rem;
+   }
+h3{
+    font-size: 2.5rem;
+    }
+.rotate{
+    transform: rotate(25deg);
+}
+.title-image{
+    width: 60%;
+    margin-top: 12%;
+
+    position: relative;  
+    left: 30%;
+    transform: rotate(25deg);
+}
+.navbar{
+    padding: 0 0 4.5rem 0;
+
+}
+.navbar-brand{
+    font-family: "Ubuntu";
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.nav-link{
+    font-size: 0.9;
+    margin: 16px;
+}
+.title-button{
+    margin: 2%;
+
+}
+
+/* features */
+#features{
+    
+    background-color: #fff;
+    position: relative;
+    bottom: 200px;
+    z-index: 1;
+    
+}
+
+.feature-box p{
+    color: #9c9c9c;
+}
+.feature-box i{
+    color: #fa7575;
+    padding-bottom: 1rem;
+
+}
+.feature-box i:hover{
+    color: #ff4c68;
+}
+
+/* testimonials */
+#testimonials{
+    position: relative;
+    bottom: 100px;
+}
+.testimonial-image{
+    border-radius: 100%;
+    width: 15%;
+    padding: 3%;
+}
+.carousel-inner{
+    padding: 5% 10%;
+}
+
+/* press */
+#press{
+    position: relative;
+    bottom: 200px;
+}
+.press-image{
+    width: 20%;
+    margin: 2%;
+}
+
+#pricing{
+    position: relative;
+    bottom: 150px;
+}
+.pricing-item{
+    padding: 3% 2%;
+}
+
+#cta{
+    
+    position: relative;
+    bottom: 80px;
+}
+
+.cta-button{
+    margin: 1%;
+    
+}
+ #footer{
+     text-align: center;
+ }   
+.footer-link{
+    padding: 1%;
+}
+/* .installbtn{
+    position:fixed;
+    z-index: 2;
+} */
+@media (max-width: 1028px) {
+    body{
+        text-align: center;
+    }
+    .rotate{
+        transform: rotate(0deg);
+    }
+    .title-image{
+        margin:3% 10%;
+        width: 60%;
+
+    }   
+}
