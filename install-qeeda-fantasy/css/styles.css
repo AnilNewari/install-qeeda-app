@@ -1,17 +1,17 @@
 #title{
-    background-color: #ff4c68;
+    /* background-color: #4c76ff; */
+    background-image: linear-gradient(to right, rgba(0, 98, 255, 0.753), rgba(77, 151, 248, 0.541));
     font-family: 'Ubuntu', sans-serif;
     color: #fff;
-    position: relative;
+    /* position: relative; */
 }
+
 body{
     font-family: 'Montserrat-Black', sans-serif;
 }
 #title .container-fluid{
-    padding: 2% 10% 6%;
-    text-align: left;
-    background-image: linear-gradient(to right,rgba(255, 17, 49, 0.527), rgba(255, 123, 0, 0.5)),
-    url("../images/ipl2.jpg");
+    padding: 0 10% 20%;
+    
 }
 .container-fluid{
     padding: 5% 10%;
@@ -40,12 +40,12 @@ h3{
     transform: rotate(25deg);
 }
 .title-image{
-    width: 60%;
-    margin-top: 12%;
+    width: 100%;
+    margin-top: 0%;
 
-    position: relative;  
-    left: 30%;
-    transform: rotate(25deg);
+    /* position: relative;  
+    left: 10%; */
+    /* transform: rotate(25deg); */
 }
 .navbar{
     padding: 0 0 4.5rem 0;
@@ -61,7 +61,7 @@ h3{
     margin: 16px;
 }
 .title-button{
-    margin: 2%;
+    margin-left: 45%;
 
 }
 
@@ -79,7 +79,7 @@ h3{
     color: #9c9c9c;
 }
 .feature-box i{
-    color: #fa7575;
+    color: #7594fa;
     padding-bottom: 1rem;
 
 }
@@ -142,13 +142,24 @@ h3{
 @media (max-width: 1028px) {
     body{
         text-align: center;
+        
     }
+    #title .container-fluid{
+        /* background-image: url(../images/unnamed.png); */
+        padding: 2% 10% 30%;
+
+    }
+
     .rotate{
         transform: rotate(0deg);
     }
-    .title-image{
-        margin:3% 10%;
-        width: 60%;
+    /* .title-image{
+        margin:3% 3%;
+        width: 40%;
+        margin-top: 60%;
+    
+        position: relative;  
+        left: 1%;
 
-    }   
+    }    */
 }
