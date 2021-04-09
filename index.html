@@ -392,7 +392,7 @@
 			document.getElementById("rc").value = urlParams.get("rc").trim();
 		}
 		console.log('called');
-		callApi("https://api3.qeedagame.com/api/qeeda/ads/campaign");
+		callApi("http://localhost:1337/api/qeeda/ads/campaign");
 		async function callApi(url) {
 			const response = await fetch(url);
 			if (response) {
@@ -418,6 +418,8 @@
 
 		}
 		function onInstallBtnClick() {
+			//callApi("https://api3.qeedagame.com/api/qeeda/ads/campaign?type=button");
+			callApi("http://localhost:1337/api/qeeda/ads/campaign?type=button");
 			document.getElementById("intallBtn").innerText = "Downloading..."
 		}
 	</script>
