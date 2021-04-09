@@ -61,8 +61,15 @@ h3{
     margin: 16px;
 }
 .title-button{
-    margin-left: 45%;
+    margin: 40%;
+    width: 40%;
+    text-shadow:1px 1px black;
+    box-shadow: 3px 3px rgb(37, 37, 37);
+    z-index: 2;
 
+}
+.title-button:hover{
+    transform: scale(1.5);
 }
 
 /* features */
@@ -153,13 +160,17 @@ h3{
     .rotate{
         transform: rotate(0deg);
     }
-    /* .title-image{
-        margin:3% 3%;
-        width: 40%;
-        margin-top: 60%;
+    .title-button{
+        margin: 1%;
+        margin-left: 50%;
+        width: 200%;
+        text-shadow:1px 1px black;
+        box-shadow: 3px 3px rgb(37, 37, 37);
+        /* z-index: 2; */
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
     
-        position: relative;  
-        left: 1%;
-
-    }    */
+    }
+    
 }
