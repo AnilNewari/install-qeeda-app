@@ -66,6 +66,7 @@ h3{
     text-shadow:1px 1px black;
     box-shadow: 3px 3px rgb(37, 37, 37);
     z-index: 2;
+    
 
 }
 .title-button:hover{
@@ -144,6 +145,11 @@ h3{
 }
 /* .installbtn{
     position:fixed;
+    z-index: 2;
+} */
+/* .fix{
+    position: fixed;
+    top: 0;
     z-index: 2;
 } */
 @media (max-width: 1028px) {
