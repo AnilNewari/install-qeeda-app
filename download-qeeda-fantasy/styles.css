@@ -8,9 +8,14 @@ body{
     top: 0;
     box-shadow:3px 1px rgb(172, 173, 173);
     z-index: 1;
+        width: 100%;
+    padding: 8px;
 }  
+.h1{
+    font-size: medium;
+}
 
-firstsection{
+#firstsection{
     background-color: aliceblue;
 }
 h1, h2, h3, h4, h5, h6{
@@ -27,9 +32,9 @@ h1, h2, h3, h4, h5, h6{
     padding: 10px 20px;
     /* text-align: center; */
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     text-shadow: 1px 1px darkgrey;
+    margin-left: 137px;
   }
   .btn:hover{
     font-family: 'Merriweather Sans', sans-serif;
@@ -39,7 +44,6 @@ h1, h2, h3, h4, h5, h6{
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
   }
 
@@ -47,13 +51,19 @@ ul {
     list-style:none;
 }
 
-i{
+h5{
     color: rgb(0, 225, 255);
-    margin: 2%;
+     margin: 2%;
 }
-li img{
+.content img{
     border-radius: 50%;
-    float:left;
+}
+.content h5{
+p
+}
+.carouselTop{
+    text-align: center;
+    margin-top: 60px;
 }
 hr{
     border:dotted #03fdfd 6px;
@@ -61,7 +71,16 @@ hr{
     width: 4%;
 }
 .content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: rgb(241, 251, 255);
+    padding: 2em;
+    margin-top: 3em;
+    text-align: left;
+}
+.contentText{
+    margin-left:4px ;
 }
 
 #footer{
@@ -70,4 +89,19 @@ hr{
 }   
 .footer-link{
    padding: 1%;
+}
+.title-paymet{
+    margin-top: 12px;
+    padding-top: 8px;
+}
+.payment-img{
+    width: 64px;
+    height: 64px;
+}
+.action-footer{
+    padding: 15px;
+}
+.resize{
+    width: 360px;
+    height: 400px;
 }
