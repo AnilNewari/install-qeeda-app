@@ -125,7 +125,7 @@ hr {
     padding: 50px;
     font-size: 20px;
 }
-.section.action {
+.action {
     padding: 10px;
     font-size: 18px;
     margin-top: 2px;
@@ -143,7 +143,7 @@ hr {
     text-align: center;
     text-decoration: none;
 }
-.div-qeeda {
+.topSection {
     display: flex;
     justify-content: space-between;
     align-items: center;
