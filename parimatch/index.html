@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Parimatch Trackers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+    <div class="container-fluid" style="margin-top: 20px;">
+        <h3 class="title">Parimatch Referral Program</h3>
+        <div class="row top-form ">
+            <div class="col-auto">
+                <input class="form-control form-control-lg" type="text" id="code" placeholder="Enter your code">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-lg" onclick="getTrackerData()">Submit</button>
+            </div>
+        </div>
+        <div class="text-center m-2">
+            <div class="spinner-border" role="status" id="spinner" style="visibility: hidden;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert-div" style="display: none;">
+            <span id="alert-content"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div id="profile">
+        </div>
+        <!-- <input type="text" value="Hello World" id="rc" readonly hidden>
+                <button class="btn btn-primary btn-sm" onclick="copyLink()">Copy</button><span id="cpd"
+                    style="display: none;">Copied!</span> -->
+        <div id="detail" style="display: none;">
+            <div class="row mt-4">
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Registration
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-text" id="registration">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Deposit
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-text" id="depositCount">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Deposit Amount
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-text" id="depositAmount">&#8377; 0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="card border-success">
+                        <div class="card-header">
+                            Commission
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-text" id="commission">&#8377; 0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Paid Amount
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-text" id="paidAmount">&#8377;0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Remaining Amount
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-text" id="remainingAmount">&#8377; 0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        console.log('js called');
+        //callApi("http://localhost:1337/api/qeeda/ads/campaign");
+        var spinner = document.getElementById("spinner");
+        var alertDiv = document.getElementById("alert-div");
+        function getTrackerData() {
+            let code = document.getElementById("code").value;
+            spinner.style.visibility = "visible";
+            if (!code) {
+                spinner.style.visibility = "hidden";
+                alert('Code is required!');
+                return;
+            }
+            console.log('code', code);
+            callApi("https://admin.qeedagame.com/api/parimatch/tracker/" + code);
+
+        }
+        async function callApi(url) {
+            try {
+                var response = await fetch(url);
+            } catch (error) {
+                spinner.style.visibility = "hidden";
+                alert(error)
+                return;
+            }
+            spinner.style.visibility = "hidden";
+            if (!response) {
+                alert("Server error, Try again later")
+                return;
+            }
+            var respData = await response.json();
+            if (respData.code && respData.code == "Error") {
+                //alert("" + respData.message);
+                alertDiv.style.display = "block";
+                document.getElementById("alert-content").innerHTML = respData.message;
+                return;
+            }
+            console.log('data', respData);
+            showData(respData);
+
+        }
+        function showData(data) {
+            var date = new Date(data.createdAt);
+            var jDate = date.toString();
+            var newDate = formatDate(jDate);
+
+            let item = `<div class="card border-secondary col-md-6 p-4">
+                <h6>Name: ${data.firstName} ${data.lastName}</h6>
+                <h6>Code: ${data.utmCode}</h6>
+                <h6>Deal: ${data.deal}</h6>
+                <h6>State: ${data.state}</h6>
+                <h6>Joining Date: ${newDate}</h6>
+                <h6>
+                    Your Link : 
+                        <input type="text" value=${data.link} id="rc" readonly>
+                        <a href=${data.link} style="margin-left:15px"
+                        target="_blank">Open</a>
+                            <button class="btn btn-primary btn-sm" onclick="copyLink()" style="margin-left:10px">Copy</button><span id="cpd"
+                                style="display: none;">Copied!</span>
+                </h6>
+            </div>`;
+            document.getElementById("profile").innerHTML = item;
+            document.getElementById("registration").innerHTML = data.regCount;
+            document.getElementById("depositCount").innerHTML = data.cpaCount;
+            document.getElementById("depositAmount").innerHTML = `&#8377; ${data.deposits}`;
+            document.getElementById("commission").innerHTML = `&#8377; ${data.commission}`;
+            document.getElementById("paidAmount").innerHTML = `&#8377; ${data.paidAmount}`;
+            document.getElementById("remainingAmount").innerHTML = `&#8377; ${data.commission - data.paidAmount}`;
+            document.getElementById("detail").style.display = "block";
+
+        }
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [day, month, year].join('-');
+        }
+
+        function copyLink() {
+            /* Get the text field */
+            var copyText = document.getElementById("rc");
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+            /* Alert the copied text */
+            document.getElementById("cpd").style.display = "inline-block"
+            // alert("Copied the text: " + copyText.value);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>
