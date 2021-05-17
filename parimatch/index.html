@@ -35,7 +35,7 @@
         <!-- <input type="text" value="Hello World" id="rc" readonly hidden>
                 <button class="btn btn-primary btn-sm" onclick="copyLink()">Copy</button><span id="cpd"
                     style="display: none;">Copied!</span> -->
-        <div id="detail" style="display: none;">
+        <div id="detail" class="mb-4" style="display: none;">
             <div class="row mt-4">
                 <div class="col-md-6 col-sm-12">
                     <div class="card">
@@ -169,7 +169,7 @@
             document.getElementById("profile").innerHTML = item;
             document.getElementById("registration").innerHTML = data.regCount;
             document.getElementById("depositCount").innerHTML = data.cpaCount;
-            document.getElementById("depositAmount").innerHTML = `&#8377; ${data.deposits}`;
+            document.getElementById("depositAmount").innerHTML = `&#8377; ${(data.deposits * 73.5).toFixed(2)}`;
             document.getElementById("commission").innerHTML = `&#8377; ${data.commission}`;
             document.getElementById("paidAmount").innerHTML = `&#8377; ${data.paidAmount}`;
             document.getElementById("remainingAmount").innerHTML = `&#8377; ${data.commission - data.paidAmount}`;
