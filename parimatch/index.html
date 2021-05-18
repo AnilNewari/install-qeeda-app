@@ -6,7 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
-
 </head>
 
 <body>
@@ -102,6 +101,28 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Referral Commission (200/deposit)
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-text" id="refCommission">&#8377;0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Referred Tracker
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-text" id="referredTracker">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -110,9 +131,11 @@
         //callApi("http://localhost:1337/api/qeeda/ads/campaign");
         var spinner = document.getElementById("spinner");
         var alertDiv = document.getElementById("alert-div");
+
         function getTrackerData() {
             let code = document.getElementById("code").value;
             spinner.style.visibility = "visible";
+            alertDiv.style.display = "none";
             if (!code) {
                 spinner.style.visibility = "hidden";
                 alert('Code is required!');
@@ -154,7 +177,7 @@
             let item = `<div class="card border-secondary col-md-6 p-4">
                 <h6>Name: ${data.firstName} ${data.lastName}</h6>
                 <h6>Code: ${data.utmCode}</h6>
-                <h6>Deal: ${data.deal}</h6>
+                <h6>Plan: ${data.deal}</h6>
                 <h6>State: ${data.state}</h6>
                 <h6>Joining Date: ${newDate}</h6>
                 <h6>
@@ -173,6 +196,8 @@
             document.getElementById("commission").innerHTML = `&#8377; ${data.commission}`;
             document.getElementById("paidAmount").innerHTML = `&#8377; ${data.paidAmount}`;
             document.getElementById("remainingAmount").innerHTML = `&#8377; ${data.commission - data.paidAmount}`;
+            document.getElementById("refCommission").innerHTML = `&#8377; ${data.referralCommission}`;
+            document.getElementById("referredTracker").innerHTML = data.referredTracker ? data.referredTracker : 0;
             document.getElementById("detail").style.display = "block";
 
         }
