@@ -190,13 +190,13 @@
                 </h6>
             </div>`;
             document.getElementById("profile").innerHTML = item;
-            document.getElementById("registration").innerHTML = data.regCount;
-            document.getElementById("depositCount").innerHTML = data.cpaCount;
+            document.getElementById("registration").innerHTML = data.regCount?data.regCount:0;
+            document.getElementById("depositCount").innerHTML = data.cpaCount?data.cpaCount:0;
             document.getElementById("depositAmount").innerHTML = `&#8377; ${(data.deposits * 73.5).toFixed(2)}`;
             document.getElementById("commission").innerHTML = `&#8377; ${data.commission}`;
             document.getElementById("paidAmount").innerHTML = `&#8377; ${data.paidAmount}`;
             document.getElementById("remainingAmount").innerHTML = `&#8377; ${data.commission - data.paidAmount}`;
-            document.getElementById("refCommission").innerHTML = `&#8377; ${data.referralCommission}`;
+            document.getElementById("refCommission").innerHTML = `&#8377; ${data.referralCommission ? data.referralCommission : 0}`;
             document.getElementById("referredTracker").innerHTML = data.referredTracker ? data.referredTracker : 0;
             document.getElementById("detail").style.display = "block";
 
