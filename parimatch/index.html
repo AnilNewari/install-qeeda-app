@@ -30,7 +30,7 @@
             <!-- <img src="assets/pm_logo.png" width="100px"> -->
             <span class="title">PariMatch Referral Program</span>
         </div>
-        <div class="top-form">
+        <div class="top-form" id="top-form">
             <div>
                 <input class="form-control" type="text" id="code" placeholder="Enter your code" autocomplete="off">
             </div>
@@ -51,20 +51,20 @@
             <div id="alert-content">
             </div>
         </div>
-        <div class="pari-content mb-4" id="pari-content">
+        <div class="pari-content mb-4 text-center" id="pari-content">
             <img src="assets/parimatch.jpg" alt="pm" class="img-fluid" style="align-self: center;">
             <!-- <iframe width="720" height="400" frameborder="0" allowfullscreen="1" class="img-fluid"
                 src="https://www.youtube.com/embed/QkcAgjga3cg?controls=0">
             </iframe> -->
-            <div class="accordion col-md-6 col-xs-12" id="accordionExample">
+            <div class="accordion col-md-6 col-xs-12" id="accordionExample" style="text-align: left;">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             Parimatch Referral Program क्या है?
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <strong>Parimatch</strong> एक बड़ी ऑनलाइन गेमिंग कंपनी है जिसने 20 वर्ष पहले यूक्रेन में
@@ -73,8 +73,7 @@
                             <strong>Parimatch Referral Program</strong> से जुड़कर आप घर बैठे लाखों कमा सकते है। इस
                             प्रोग्राम से जुड़कर आपको एक
                             लिंक दिया जाएगा जिसकी सहायता से आपको <strong>Parimatch</strong> में रेजिस्ट्रेशन एवं न्यूनतम
-                            डिपॉज़िट (551/-)
-                            कराना होगा।
+                            डिपॉज़िट कराना होगा।
                         </div>
                     </div>
                 </div>
@@ -134,8 +133,8 @@
                     <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <strong>Parimatch Referral Program</strong> का लिंक एवं कोड पाने के लिए अभी 7073342728 पर
-                            सम्पर्क करें।
+                            <strong>Parimatch Referral Program</strong> का Referral लिंक एवं कोड प्राप्त करने के लिए अभी
+                            prpindia2021@gmail.com पर अपना नाम, मोबाइल नम्बर एवं पता मेल करें।
                         </div>
                     </div>
                 </div>
@@ -144,7 +143,7 @@
 
         <div id="profile" class="profile">
         </div>
-        <div id="detail" class="mb-4 mt-4" style="display: none;">
+        <div id="detail" class="mt-4" style="display: none;">
             <div class="row">
                 <div class="col-md-6 col-sm-12 col-xs-12 mb-4">
                     <div class="card">
@@ -234,6 +233,9 @@
                 </div>
             </div>
         </div>
+        <div class="mb-4" style="text-align: center; display: none;" id="logoutBtn">
+            <button class="btn btn-primary" onclick="logOut()">Logout</button>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -244,8 +246,20 @@
         var detail = document.getElementById("detail");
         var profile = document.getElementById("profile");
         var pariContent = document.getElementById("pari-content");
+        var logoutBtn = document.getElementById("logoutBtn");
+        var topForm = document.getElementById("top-form");
 
-
+        var savedCode = localStorage.getItem("code");
+        console.log('savedCode', savedCode);
+        if (savedCode) {
+            pariContent.style.display = "none";
+            spinner.style.display = "inline-block";
+            detail.style.display = "none";
+            profile.style.display = "none";
+            topForm.style.display = "none";
+            alertDiv.setAttribute('style', 'display: none !important');
+            callApi(savedCode);
+        }
         function getTrackerData() {
             let code = document.getElementById("code").value;
             spinner.style.display = "inline-block";
@@ -258,10 +272,10 @@
                 return;
             }
             console.log('code', code);
-            callApi("https://admin.qeedagame.com/api/parimatch/tracker/" + code);
-
+            callApi(code);
         }
-        async function callApi(url) {
+        async function callApi(code) {
+            var url = "https://admin.qeedagame.com/api/parimatch/tracker/" + code
             try {
                 var response = await fetch(url);
             } catch (error) {
@@ -286,7 +300,9 @@
 
         }
         function showData(data) {
+            topForm.style.display = "none";
             pariContent.style.display = "none";
+            localStorage.setItem("code", data.utmCode);
             var date = new Date(data.createdAt);
             var jDate = date.toString();
             var newDate = formatDate(jDate);
@@ -319,6 +335,8 @@
             document.getElementById("refCommission").innerHTML = `&#8377; ${data.referralCommission ? data.referralCommission : 0}`;
             document.getElementById("referredTracker").innerHTML = data.referredTracker ? data.referredTracker : 0;
             detail.style.display = "block";
+            logoutBtn.style.display = "block";
+
 
         }
 
@@ -334,6 +352,15 @@
                 day = '0' + day;
 
             return [day, month, year].join('-');
+        }
+
+        function logOut() {
+            localStorage.removeItem("code");
+            logoutBtn.style.display = "none";
+            topForm.style.display = "flex";
+            pariContent.style.display = "flex";
+            detail.style.display = "none";
+            profile.style.display = "none";
         }
 
         function copyLink() {
